@@ -1,0 +1,63 @@
+*****************MANYTOMANY**************************
+from django.db import models
+# se Generara con many-to-many un nueva tabla
+class Carrera(models.Model):
+    title = models.CharField(max_length=50)
+    universidad = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class Persona(models.Model):
+    nombre= models.CharField(max_length=50)
+    apellido= models.CharField(max_length=50)
+    age = models.IntegerField()
+    estudios = models.ManyToManyField(Carrera)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+    	return self.nombre
+************************instancias*******************************
+titulo_de1 = Carrera.objects.create(title='Ingeniero', universidad='URBE')
+titulo_de2 = Carrera.objects.create(title='Medico', universidad='LUZ')
+titulo_de3 = Carrera.objects.create(title='Contador', universidad='LUZ')
+titulo_de4 = Carrera.objects.create(title='Mecanico', universidad='Empirico')
+titulo_de5 = Carrera.objects.create(title='Modista', universidad='Empirico')
+titulo_de6 = Carrera.objects.create(title='Administrador', universidad='URBE')
+titulo_de7 = Carrera.objects.create(title='Electronico', universidad='CUNIBE')
+titulo_de8 = Carrera.objects.create(title='Electricista', universidad='Sena')
+*********
+person1 = Persona.objects.create(nombre='Carlos',apellido='Gonzalez',age=43)
+person2 = Persona.objects.create(nombre='Lucila',apellido='Gonzalez',age=67)
+person3 = Persona.objects.create(nombre='Kevin',apellido='Barrios',age=42)
+person4 = Persona.objects.create(nombre='Heiner',apellido='Arrias',age=43)
+person5 = Persona.objects.create(nombre='Alberto',apellido='Gonzalez',age=69)
+person6 = Persona.objects.create(nombre='Joaquin',apellido='Gonzalez',age=63)
+person7 = Persona.objects.create(nombre='Alicia',apellido='Quesada',age=76)
+person8 = Persona.objects.create(nombre='Alejandra',apellido='Gonzalez',age=22)
+person9 = Persona.objects.create(nombre='Cesar',apellido='Carvajal',age=52)
+person10 = Persona.objects.create(nombre='Luis',apellido='Medina',age=53)
+
+************************ejemplos*******************************
+direccion directa:
+class-fieldmanytomay>class-sinfieldmanytomany = visible                ok
+inst_conclasemanytomany.field_manytomany.add(inst-otratabla)           ok
+inst_conclasemanytomany.field_manytomany.all()                         ok
+inst_conclasemanytomany.field_manytomany.filter(x='y')                 ok
+inst_conclasemanytomany.field_manytomany.filter(x='y').filter(y='z')   ok
+***************************************************************
+direccion inversa:
+class-sinfieldmanytomany > class-fieldmanytomay> = False (debe usar _set o related_name para ver)
+inst-sinmanytomany.modelominusculamanytomnany_set.add(inst-conmanytomany)
+inst-sinfieldmanytomany.modeloenminusculaconmanytomany + _set                                      ok
+inst-sinfieldmanytomany.modeloenminusculaconmanytomany_set.count()                                 ok
+inst-sinfieldmanytomany.modeloenminusculaconmanytomany_set.filter();order_by()                     ok
+inst-sinfieldmanytomany.modeloenminusculaconmanytomany_set.remove(inst-) o .related_name.remove()  ok
+modeloenminusculaconmanytomany_set => recuerde que se le puede aplicar related_name                ok
+add-remove-clear-count                                                                             ok
+inst-conmanytomany.fieldsmanytomany.clear()                                                        ok
+inst-sinmanytomany.modelominusculamanytomany_set.clear()                                           ok
+******************************************************************
+modeloconmanytomany.objects.filter(fieldmanytomany__fieldmodelosinmanytomnay = 'value')            ok
+modelosinnmanytomany.objects.filter(modelominusculaconmanytomany__fieldmodeloconmanytomnay = 'value')
